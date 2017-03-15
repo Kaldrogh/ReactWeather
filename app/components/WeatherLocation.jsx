@@ -1,6 +1,6 @@
 import React from 'react';
 
-var WeatherLocation = ({props}) => {
+var WeatherLocation = (props) => {
   var {temp, location} = props;
   return (
   <div>
