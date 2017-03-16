@@ -29,7 +29,8 @@ module.exports = {
       Examples$: path.join(__dirname, 'app/components/Examples.jsx'),
       WeatherForm$: path.join(__dirname, 'app/components/WeatherForm.jsx'),
       WeatherLocation$: path.join(__dirname, 'app/components/WeatherLocation.jsx'),
-      openWeatherMap$: path.join(__dirname, 'app/api/openWeatherMap.jsx')
+      openWeatherMap$: path.join(__dirname, 'app/api/openWeatherMap.jsx'),
+      ErrorModal$: path.join(__dirname, 'app/components/ErrorModal.jsx')
     },
     extensions: ['*', '.js', '.jsx']
   },

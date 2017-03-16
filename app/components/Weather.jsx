@@ -2,11 +2,13 @@ import React from 'react';
 import WeatherForm from 'WeatherForm';
 import WeatherLocation from 'WeatherLocation';
 import openWeatherMap from 'openWeatherMap';
+import ErrorModal from 'ErrorModal';
 
 var Weather = React.createClass({
   getInitialState: function () {
     return {
-      isLoading: false
+      isLoading: false,
+
     }
   },
   handleSearch: function (location) {
@@ -14,7 +16,10 @@ var Weather = React.createClass({
 
     // debugger;
 
-    self.setState({isLoading: true});
+    self.setState({
+      isLoading: true,
+      errorMessage: undefined
+    });
     // Application d'une promesse (Promise) en fonction du retour de la promesse déclarée dans le fichier openWeatherMap.jsx.
     openWeatherMap.getTemp(location).then(function (temp) {
       // Si le retour est valide (fonction de retour de la promesse "resolve"), on met à jour le state de l'application en spécifiant les valeurs de la ville (location), de la température et de la phrase de chargement.
@@ -24,14 +29,18 @@ var Weather = React.createClass({
         temp: temp,
         isLoading: false
       });
-    }, function (errorMessage) {
+    }, function (e) {
       // Si le retour est invalide (fonction de retour de la promesse "reject"), on affiche un message d'erreur et on désactive la phrase de chargement.
-      alert(errorMessage);
-      self.setState({isLoading:false});
+      self.setState({
+        isLoading:false,
+        errorMessage: e.message,
+        temp: undefined,
+        location: undefined
+      });
     });
   },
   render: function () {
-    var {isLoading, temp, location} = this.state;
+    var {isLoading, temp, location, errorMessage} = this.state;
 
     function renderMessage() {
 
@@ -42,11 +51,24 @@ var Weather = React.createClass({
       }
     }
 
+    function renderError () {
+
+      if (typeof errorMessage === "string") {
+        debugger;
+        return (
+          <div>
+            <ErrorModal/>
+          </div>
+        );
+      }
+    }
+
     return (
       <div>
         <h1 className="text-center">Get Weather</h1>
         <WeatherForm onSearch={this.handleSearch}/>
         {renderMessage()}
+        {renderError()}
       </div>
     );
   }
