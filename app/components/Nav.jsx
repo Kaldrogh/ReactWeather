@@ -26,7 +26,7 @@ var Nav = React.createClass({
         <div className="top-bar-right">
           <form onSubmit={this.onSearch}>
             <ul className="menu">
-              <li><input type="search" placeholder="Entrez une ville"></input></li>
+              <li><input type="search" placeholder="Entrez le nom d'une ville"></input></li>
               <li><button type="button" className="button">Search</button></li>
             </ul>
           </form>
