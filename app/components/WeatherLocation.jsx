@@ -4,7 +4,7 @@ var WeatherLocation = (props) => {
   var {temp, location} = props;
   return (
   <div>
-    <p>Il fait {temp}° à {location}.</p>
+    <h3 className="text-center">Il fait {temp}° à {location}.</h3>
   </div>
   );
 }
