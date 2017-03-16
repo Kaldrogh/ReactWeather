@@ -14,7 +14,7 @@ module.exports = {
     // Utilisation d'une promesse (Promise), fonctionnalité implémentée par ES6 et matérialisé par le ".then(resolve, reject)" qui supplante le callback classique et renvoie deux fonctions (resolve, reject), chaque fonction gérant le retour positif (resolve) ou négatif(reject) de la requête initiale à l'API  d'openWeatherMap.
     return axios.get(requestUrl).then(function (res) {
       var cityReq = location.toUpperCase().replace(/[^\w\s]/gi, ' ');
-      var nameFetch = res.data.list[0].name.toUpperCase().replace(/[^\w\s]/gi, ' ');
+      var nameFetch = res.data.list[0].name.toUpperCase().replace(/[^\w\s]/gi, ' ') || "Noeud inexistant, la propriété name n'est pas définie (undefined)";
       // Fonction gérant un retour positif (resolve) => function (res) {} <=, si le résultat JSON comporte une liste de noeuds vide, cela signifie que le retour s'est bien passé mais que l'api n'a pas trouvé de ville correspondante.
       if (res.data.list.length === 0 || nameFetch !== cityReq ) {
         console.log('Résultat openWeatherMap : ' + nameFetch + ", requête utilisateur : " + cityReq);
@@ -25,9 +25,9 @@ module.exports = {
         // Sinon, on récupère le premier objet à l'index 0 du tableau "list" afin d'obtenir la température correspondante.
         return res.data.list[0].main.temp;
       }
-    }, function (res) {
+    }, function (err) {
       // Fonction reject, dans le cas où le retour JSON renvoyé par l'api est invalide, vide, ou autre.
-      throw new Error(res.data.message);
+      throw new Error('Impossible de récupérer la température pour cette ville.');
     });
   }
 }
