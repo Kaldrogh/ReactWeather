@@ -23,7 +23,6 @@ module.exports = {
 
       } else {
         // Sinon, on récupère le premier objet à l'index 0 du tableau "list" afin d'obtenir la température correspondante.
-        debugger;
         return res.data.list[0].main.temp;
       }
     }, function (res) {

@@ -7,11 +7,11 @@ var ErrorModal = React.createClass({
   },
   render: function () {
     return (
-      <div id="error-modal" className="reveal tiny text-center" data-reveal>
+      <div id="error-modal" className="reveal tiny text-center" data-reveal="">
         <h4>ErrorModal Title</h4>
         <p>This is an error message.</p>
         <p>
-          <button className="button" data-close>Alright</button>
+          <button className="button" data-close="">Alright</button>
         </p>
       </div>
     );
